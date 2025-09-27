@@ -25,10 +25,10 @@ defmodule Anoma.Node.Transport.GRPC.Behavior do
     {:ok, channel} = GRPC.Stub.connect("#{host}:#{port}")
 
     request =
-      Event.Request.new(%{
+      %Event.Request{
         topic: %PubSub.Topic{topic: topic},
         message: %PubSub.Message{message: :erlang.term_to_binary(event)}
-      })
+      }
 
     {:ok, %Event.Response{}} = PubSubService.Stub.publish(channel, request)
     :ok
@@ -48,12 +48,12 @@ defmodule Anoma.Node.Transport.GRPC.Behavior do
     engine = message.engine
 
     request =
-      Call.Request.new(%{
+      %Call.Request{
         node: %Node{id: to_node_id},
         from: %Node{id: from_node_id},
         message: :erlang.term_to_binary(payload),
         engine: "#{engine}"
-      })
+      }
 
     {:ok, response} = IntraNodeService.Stub.call(channel, request)
 
@@ -79,12 +79,12 @@ defmodule Anoma.Node.Transport.GRPC.Behavior do
     engine = message.engine
 
     request =
-      Cast.Request.new(%{
+      %Cast.Request{
         node: %Node{id: to_node_id},
         from: %Node{id: from_node_id},
         message: :erlang.term_to_binary(payload),
         engine: "#{engine}"
-      })
+      }
 
     {:ok, %Cast.Response{}} = IntraNodeService.Stub.cast(channel, request)
     :ok
