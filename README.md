@@ -100,6 +100,7 @@ apt install cmake
 To install the dependencies as well as Anoma run:
 
 ```bash
+rm -rf _build deps mix.lock
 mix deps.get
 mix compile
 ```
