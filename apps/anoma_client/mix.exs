@@ -36,7 +36,7 @@ defmodule Anoma.Client.MixProject do
       {:anoma_node, in_umbrella: true, runtime: false},
       {:anoma_lib, in_umbrella: true},
       {:anoma_protobuf, in_umbrella: true},
-      {:protobuf, "~> 0.11.0"},
+      {:protobuf, "~> 0.15.0"},
       {:grpc, "~> 0.9"},
       {:phoenix, "~> 1.7.14"},
       {:bandit, "~> 1.5"},
