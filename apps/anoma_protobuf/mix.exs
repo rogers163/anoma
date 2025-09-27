@@ -42,7 +42,7 @@ defmodule Anoma.Protobuf.MixProject do
       {:anoma_lib, in_umbrella: true},
       {:compile_protoc, in_umbrella: true},
       {:grpc, "~> 0.9"},
-      {:protobuf, "~> 0.11.0"}
+      {:protobuf, "~> 0.15.0"}
     ] ++ global_deps()
   end
 
