@@ -40,13 +40,22 @@ defmodule Anoma.Node.Examples.ENode do
   def start_node(opts \\ []) do
     node_id = Base.encode16(:crypto.strong_rand_bytes(32))
 
+    # 获取传入的node_config，如果没有则使用默认值
+    default_node_config = %{
+      node_id: node_id,
+      grpc_host: "localhost",
+      grpc_port: Application.get_env(:anoma_node, :grpc_port)
+    }
+    
+    # 合并传入的node_config和默认值，传入的值优先
+    node_config = case Keyword.get(opts, :node_config) do
+      nil -> default_node_config
+      custom_config -> Map.merge(default_node_config, custom_config)
+    end
+
     opts =
       Keyword.validate!(opts,
-        node_config: %{
-          node_id: node_id,
-          grpc_host: "localhost",
-          grpc_port: Application.get_env(:anoma_node, :grpc_port)
-        },
+        node_config: node_config,
         node_id: node_id
       )
 
