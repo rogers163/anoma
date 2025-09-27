@@ -102,6 +102,7 @@ To install the dependencies as well as Anoma run:
 ```bash
 rm -rf _build deps mix.lock
 mix deps.get
+(mix deps.update protobuf --force)
 mix compile
 ```
 
